@@ -26,6 +26,9 @@ public class Vehicle {
         this.sold = sold;
     }
 
+    public Vehicle(int vin, int year, String make, String model, String type, String color, int odometer, double price) {
+    }
+
     public int getVin() {
         return vin;
     }

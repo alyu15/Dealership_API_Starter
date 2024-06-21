@@ -6,12 +6,10 @@ import java.util.List;
 
 public interface VehiclesDao {
 
-    List<Vehicle> searchVehiclePrice(double minPrice, double maxPrice);
-    List<Vehicle> searchVehicleMakeModel(String make, String model);
-    List<Vehicle> searchVehicleYear(int minYear, int maxYear);
-    List<Vehicle> searchVehicleColor(String color);
-    List<Vehicle> searchVehicleOdometer(int minMiles, int maxMiles);
-    List<Vehicle> searchVehicleType(String type);
+
+    List<Vehicle> search(double minPrice, double maxPrice, String make, String model, int minYear, int maxYear,
+                         String color, int minMiles, int maxMiles, String type, Boolean sold);
+    Vehicle getByVin(int vin);
     Vehicle create(Vehicle vehicle);
     void updateVehicle(int vin, Vehicle vehicle);
     void deleteVehicle(int vin);

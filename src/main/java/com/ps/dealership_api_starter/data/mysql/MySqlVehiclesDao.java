@@ -4,6 +4,11 @@ import com.ps.dealership_api_starter.data.VehiclesDao;
 import com.ps.dealership_api_starter.models.Vehicle;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
@@ -12,40 +17,187 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
         super(dataSource);
     }
 
-    public List<Vehicle> searchVehiclePrice(double minPrice, double maxPrice) {
-        return List.of();
+    @Override
+    public List<Vehicle> search(double minPrice, double maxPrice, String make, String model, int minYear, int maxYear,
+                                String color, int minMiles, int maxMiles, String type, Boolean sold) {
+
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        String query = "SELECT * FROM Vehicles " +
+                "WHERE (Price BETWEEN ? AND ?)" +
+                "AND (Make LIKE ?)" +
+                "AND (Model LIKE ?)" +
+                "AND (Year BETWEEN ? AND ?)" +
+                "AND (Color LIKE ?)" +
+                "AND (Odometer BETWEEN ? AND ?)" +
+                "AND (Vehicle_Type LIKE ?)" +
+                "AND (Sold = ?)";
+
+//        Double minPriceToSearch = minPrice == null ? new Double(-1) : minPrice;
+//        Double maxPriceToSearch = maxPrice == null ? new Double(-1) : maxPrice;
+        String makeToSearch = make == null ? "%" : make;
+        String modelToSearch = model == null ? "%" : model;
+//        int minYearToSearch = minYear == null ? new Integer(-1) : minYear;
+//        int maxYearToSearch = maxYear == null ? new Integer(-1) : maxYear;
+        String colorToSearch = color == null ? "%" : color;
+//        int minMilesToSearch = minMiles == null ? new Integer(-1) : minMiles;
+//        int maxMilesToSearch = maxMiles == null ? new Integer(-1) : maxMiles;
+        String typeToSearch = type == null ? "%" : type;
+
+        try(Connection connection = getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setDouble(1, minPrice);
+            preparedStatement.setDouble(2, maxPrice);
+            preparedStatement.setString(3, "%" + make + "%");
+            preparedStatement.setString(4, "%" + model + "%");
+            preparedStatement.setInt(5, minYear);
+            preparedStatement.setInt(6, maxYear);
+
+            preparedStatement.setString(7, "%" + color + "%");
+            preparedStatement.setInt(8, minMiles);
+            preparedStatement.setInt(9, maxMiles);
+            preparedStatement.setString(10, "%" + type + "%");
+            preparedStatement.setBoolean(11, sold);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                Vehicle vehicle = mapResultSet(resultSet);
+                vehicles.add(vehicle);
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+        return vehicles;
     }
 
-    public List<Vehicle> searchVehicleMakeModel(String make, String model) {
-        return List.of();
-    }
+    @Override
+    public Vehicle getByVin(int vin)
+    {
+        String sql = "SELECT * FROM Vehicles WHERE vin = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, vin);
 
-    public List<Vehicle> searchVehicleYear(int minYear, int maxYear) {
-        return List.of();
-    }
+            ResultSet resultSet = statement.executeQuery();
 
-    public List<Vehicle> searchVehicleColor(String color) {
-        return List.of();
-    }
-
-    public List<Vehicle> searchVehicleOdometer(int minMiles, int maxMiles) {
-        return List.of();
-    }
-
-    public List<Vehicle> searchVehicleType(String type) {
-        return List.of();
+            if (resultSet.next())
+            {
+                return mapResultSet(resultSet);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     public Vehicle create(Vehicle vehicle) {
-        return vehicle;
+
+        String query = "INSERT INTO Vehicles(vin, year, make, model, vehicle_type, color, odometer, price, sold)" +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try(Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1,vehicle.getVin());
+            preparedStatement.setInt(2, vehicle.getYear());
+            preparedStatement.setString(3, vehicle.getMake());
+            preparedStatement.setString(4, vehicle.getModel());
+            preparedStatement.setString(5, vehicle.getVehicleType());
+
+            preparedStatement.setString(6, vehicle.getColor());
+            preparedStatement.setInt(7, vehicle.getOdometer());
+            preparedStatement.setDouble(8, vehicle.getPrice());
+            preparedStatement.setBoolean(9, vehicle.isSold());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if(rowsAffected < 0) {
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+                if(generatedKeys.next()) {
+                    int vin = generatedKeys.getInt(1);
+
+                    return getByVin(vin);
+                }
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     public void updateVehicle(int vin, Vehicle vehicle) {
 
+        String query = "UPDATE vehicles SET year = ?, make = ?, model = ?, type = ?," +
+                "color = ?, odometer = ?, price = ?, sold_or_leased = ?" +
+                "WHERE vin = ?";
+
+        try(Connection connection = getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, vehicle.getYear());
+            preparedStatement.setString(2, vehicle.getMake());
+            preparedStatement.setString(3, vehicle.getModel());
+            preparedStatement.setString(4, vehicle.getVehicleType());
+            preparedStatement.setString(5, vehicle.getColor());
+
+            preparedStatement.setInt(6, vehicle.getOdometer());
+            preparedStatement.setDouble(7, vehicle.getPrice());
+            preparedStatement.setBoolean(8, vehicle.isSold());
+            preparedStatement.setInt(9,vehicle.getVin());
+
+            preparedStatement.executeUpdate();
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteVehicle(int vin) {
 
+        String query = "DELETE FROM Vehicles WHERE vin = ?";
+
+        try(Connection connection = getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, vin);
+            preparedStatement.executeUpdate();
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    protected static Vehicle mapResultSet(ResultSet resultSet) throws SQLException {
+
+        int vin = resultSet.getInt("vin");
+        int year = resultSet.getInt("year");
+        String make = resultSet.getString("make");
+        String model = resultSet.getString("model");
+        String type = resultSet.getString("vehicle_type");
+        String color = resultSet.getString("color");
+        int odometer = resultSet.getInt("odometer");
+        double price = resultSet.getDouble("price");
+        boolean sold = resultSet.getBoolean("sold");
+
+
+        return new Vehicle(vin, year, make, model, type, color, odometer, price, sold);
     }
 
 }

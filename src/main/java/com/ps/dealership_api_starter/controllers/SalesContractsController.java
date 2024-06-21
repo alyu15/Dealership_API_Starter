@@ -1,8 +1,11 @@
 package com.ps.dealership_api_starter.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ps.dealership_api_starter.data.SalesContractsDao;
+import com.ps.dealership_api_starter.models.SalesContract;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("salesContracts")
@@ -10,5 +13,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class SalesContractsController {
 
-    private
+    private SalesContractsDao salesContractsDao;
+
+    @Autowired
+    public SalesContractsController(SalesContractsDao salesContractsDao) {
+        this.salesContractsDao = salesContractsDao;
+    }
+
+    @GetMapping("{id}")
+    public SalesContract getBySalesId(@PathVariable int id) {
+
+        try {
+            SalesContract salesContract = salesContractsDao.getBySalesContractId(id);
+
+            if(salesContract == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+
+            return salesContract;
+
+        } catch(Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+        }
+    }
+
+    @PostMapping()
+    public SalesContract addSalesContract(@RequestBody SalesContract salesContract) {
+
+        try {
+
+            return salesContractsDao.createSalesContract(salesContract);
+
+        } catch(Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+        }
+    }
 }

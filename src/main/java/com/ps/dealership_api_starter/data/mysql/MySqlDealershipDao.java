@@ -14,6 +14,7 @@ import java.util.List;
 
 @Component
 public class MySqlDealershipDao extends MySqlDaoBase implements DealershipDao {
+
     public MySqlDealershipDao(DataSource dataSource)
     {
         super(dataSource);
@@ -57,6 +58,7 @@ public class MySqlDealershipDao extends MySqlDaoBase implements DealershipDao {
     public Dealership getById(int dealershipId)
     {
         String sql = "SELECT * FROM dealerships WHERE dealership_id = ?";
+
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);

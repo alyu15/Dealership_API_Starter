@@ -2,8 +2,6 @@ package com.ps.dealership_api_starter.data;
 
 import com.ps.dealership_api_starter.models.SalesContract;
 
-import java.util.List;
-
 public interface SalesContractsDao {
 
     SalesContract getBySalesContractId(int contract_id);

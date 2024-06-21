@@ -18,6 +18,8 @@ public class MySqlSalesContractsDao extends MySqlDaoBase implements SalesContrac
     @Override
     public SalesContract getBySalesContractId(int contract_id) {
 
+        SalesContract salesContract = null;
+
         String query = "SELECT * FROM Sales_Contracts WHERE contract_id = ?";
 
         try(Connection connection = getConnection()) {
@@ -28,7 +30,7 @@ public class MySqlSalesContractsDao extends MySqlDaoBase implements SalesContrac
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.next()) {
-                return mapResultSet(resultSet);
+                salesContract = mapResultSet(resultSet);
             }
 
         } catch(Exception e) {
@@ -36,14 +38,14 @@ public class MySqlSalesContractsDao extends MySqlDaoBase implements SalesContrac
             throw new RuntimeException(e);
         }
 
-        return null;
+        return salesContract;
     }
 
     @Override
     public SalesContract createSalesContract(SalesContract salesContract) {
 
         String query = "INSERT INTO sales_contracts(contract_date, customer_name, customer_email," +
-                "vin, sales_tax_amount, recording_fee, processing_fee, is_financing)" +
+                "vin, sales_tax, recording_fee, processing_fee, is_financing)" +
                 " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = getConnection()) {

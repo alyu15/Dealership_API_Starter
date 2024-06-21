@@ -56,7 +56,10 @@ public class MySqlDealershipDao extends MySqlDaoBase implements DealershipDao {
 
     @Override
     public Dealership getById(int dealershipId)
+
     {
+        Dealership dealership = null;
+
         String sql = "SELECT * FROM dealerships WHERE dealership_id = ?";
 
         try (Connection connection = getConnection())
@@ -68,7 +71,7 @@ public class MySqlDealershipDao extends MySqlDaoBase implements DealershipDao {
 
             if (row.next())
             {
-                return mapRow(row);
+                dealership = mapRow(row);
             }
         }
         catch (SQLException e)
@@ -76,7 +79,7 @@ public class MySqlDealershipDao extends MySqlDaoBase implements DealershipDao {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        return null;
+        return dealership;
     }
 
     @Override

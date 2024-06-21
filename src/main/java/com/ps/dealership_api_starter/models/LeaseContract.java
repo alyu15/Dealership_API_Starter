@@ -1,6 +1,7 @@
 package com.ps.dealership_api_starter.models;
 
 public class LeaseContract {
+
     private int contractId;
     private String contractDate;
     private String customerName;

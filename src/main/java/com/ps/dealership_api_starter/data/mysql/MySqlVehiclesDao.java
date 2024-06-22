@@ -53,15 +53,15 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
             preparedStatement.setDouble(1, minPrice);
             preparedStatement.setDouble(2, maxPrice);
-            preparedStatement.setString(3, "%" + make + "%");
-            preparedStatement.setString(4, "%" + model + "%");
+            preparedStatement.setString(3, "%" + makeToSearch + "%");
+            preparedStatement.setString(4, "%" + modelToSearch + "%");
             preparedStatement.setInt(5, minYear);
             preparedStatement.setInt(6, maxYear);
 
-            preparedStatement.setString(7, "%" + color + "%");
+            preparedStatement.setString(7, "%" + colorToSearch + "%");
             preparedStatement.setInt(8, minMiles);
             preparedStatement.setInt(9, maxMiles);
-            preparedStatement.setString(10, "%" + type + "%");
+            preparedStatement.setString(10, "%" + typeToSearch + "%");
             preparedStatement.setBoolean(11, sold);
 
             ResultSet resultSet = preparedStatement.executeQuery();

@@ -2,6 +2,7 @@ package com.ps.dealership_api_starter.data.mysql;
 
 import com.ps.dealership_api_starter.data.VehiclesDao;
 import com.ps.dealership_api_starter.models.Vehicle;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+@Component
 
 public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
@@ -78,8 +81,13 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
     @Override
     public Vehicle getByVin(int vin)
+
     {
+
+        Vehicle vehicle = null;
+
         String sql = "SELECT * FROM Vehicles WHERE vin = ?";
+
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -89,7 +97,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
             if (resultSet.next())
             {
-                return mapResultSet(resultSet);
+                vehicle = mapResultSet(resultSet);
             }
         }
         catch (SQLException e)
@@ -97,13 +105,13 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        return null;
+        return vehicle;
     }
 
     public Vehicle create(Vehicle vehicle) {
 
         String query = "INSERT INTO Vehicles(vin, year, make, model, vehicle_type, color, odometer, price, sold)" +
-                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -121,7 +129,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
             int rowsAffected = preparedStatement.executeUpdate();
 
-            if(rowsAffected < 0) {
+            if(rowsAffected > 0) {
                 ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
 
                 if(generatedKeys.next()) {
@@ -140,8 +148,8 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
     public void updateVehicle(int vin, Vehicle vehicle) {
 
-        String query = "UPDATE vehicles SET year = ?, make = ?, model = ?, type = ?," +
-                "color = ?, odometer = ?, price = ?, sold_or_leased = ?" +
+        String query = "UPDATE vehicles SET year = ?, make = ?, model = ?, vehicle_type = ?," +
+                "color = ?, odometer = ?, price = ?, sold = ? " +
                 "WHERE vin = ?";
 
         try(Connection connection = getConnection()) {
@@ -157,7 +165,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
             preparedStatement.setInt(6, vehicle.getOdometer());
             preparedStatement.setDouble(7, vehicle.getPrice());
             preparedStatement.setBoolean(8, vehicle.isSold());
-            preparedStatement.setInt(9,vehicle.getVin());
+            preparedStatement.setInt(9, vin);
 
             preparedStatement.executeUpdate();
 

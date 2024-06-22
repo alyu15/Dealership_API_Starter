@@ -2,12 +2,15 @@ package com.ps.dealership_api_starter.data.mysql;
 
 import com.ps.dealership_api_starter.data.SalesContractsDao;
 import com.ps.dealership_api_starter.models.SalesContract;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+@Component
 
 public class MySqlSalesContractsDao extends MySqlDaoBase implements SalesContractsDao {
 
@@ -45,8 +48,8 @@ public class MySqlSalesContractsDao extends MySqlDaoBase implements SalesContrac
     public SalesContract createSalesContract(SalesContract salesContract) {
 
         String query = "INSERT INTO sales_contracts(contract_date, customer_name, customer_email," +
-                "vin, sales_tax, recording_fee, processing_fee, is_financing)" +
-                " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                "vin, sales_tax, recording_fee, processing_fee, total_price, finance_option)" +
+                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = getConnection()) {
 
@@ -56,11 +59,12 @@ public class MySqlSalesContractsDao extends MySqlDaoBase implements SalesContrac
             preparedStatement.setString(2,salesContract.getCustomerName());
             preparedStatement.setString(3, salesContract.getCustomerEmail());
             preparedStatement.setInt(4, salesContract.getVin());
-
             preparedStatement.setDouble(5, salesContract.getSalesTax());
+
             preparedStatement.setDouble(6, salesContract.getRecordingFee());
             preparedStatement.setDouble(7, salesContract.getProcessingFee());
-            preparedStatement.setString(8, salesContract.getFinanceOption());
+            preparedStatement.setDouble(8, salesContract.getTotalPrice());
+            preparedStatement.setString(9, salesContract.getFinanceOption());
 
             int rowsAffected = preparedStatement.executeUpdate();
 

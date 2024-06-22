@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("salesContracts")
+@RequestMapping("/sales_contracts")
 @CrossOrigin
 
 public class SalesContractsController {

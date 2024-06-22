@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("leaseContracts")
+@RequestMapping("/lease_contracts")
 @CrossOrigin
 
 public class LeaseContractsController {
@@ -38,7 +38,7 @@ public class LeaseContractsController {
     }
 
     @PostMapping()
-    public LeaseContract addLeaseContract(LeaseContract leaseContract) {
+    public LeaseContract addLeaseContract(@RequestBody LeaseContract leaseContract) {
 
         try {
 

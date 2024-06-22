@@ -2,6 +2,7 @@ package com.ps.dealership_api_starter.data.mysql;
 
 import com.ps.dealership_api_starter.data.LeaseContractsDao;
 import com.ps.dealership_api_starter.models.LeaseContract;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class MySqlLeaseContractsDao extends MySqlDaoBase implements LeaseContractsDao {
 
     public MySqlLeaseContractsDao(DataSource dataSource) {
@@ -66,7 +68,7 @@ public class MySqlLeaseContractsDao extends MySqlDaoBase implements LeaseContrac
 
             int rowsAffected = preparedStatement.executeUpdate();
 
-            if(rowsAffected < 0) {
+            if(rowsAffected > 0) {
                 ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
 
                 if(generatedKeys.next()) {

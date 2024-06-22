@@ -36,31 +36,31 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
                 "AND (Vehicle_Type LIKE ?)" +
                 "AND (Sold = ?)";
 
-//        Double minPriceToSearch = minPrice == null ? new Double(-1) : minPrice;
-//        Double maxPriceToSearch = maxPrice == null ? new Double(-1) : maxPrice;
+        double minPriceToSearch = minPrice == 0 ? -1 : minPrice;
+        double maxPriceToSearch = maxPrice == 0 ? -1 : maxPrice;
         String makeToSearch = make == null ? "%" : make;
         String modelToSearch = model == null ? "%" : model;
-//        int minYearToSearch = minYear == null ? new Integer(-1) : minYear;
-//        int maxYearToSearch = maxYear == null ? new Integer(-1) : maxYear;
+        int minYearToSearch = minYear == 0 ? -1 : minYear;
+        int maxYearToSearch = maxYear == 0 ? -1 : maxYear;
         String colorToSearch = color == null ? "%" : color;
-//        int minMilesToSearch = minMiles == null ? new Integer(-1) : minMiles;
-//        int maxMilesToSearch = maxMiles == null ? new Integer(-1) : maxMiles;
+        int minMilesToSearch = minMiles == 0 ? -1 : minMiles;
+        int maxMilesToSearch = maxMiles == 0 ? -1 : maxMiles;
         String typeToSearch = type == null ? "%" : type;
 
         try(Connection connection = getConnection()) {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setDouble(1, minPrice);
-            preparedStatement.setDouble(2, maxPrice);
+            preparedStatement.setDouble(1, minPriceToSearch);
+            preparedStatement.setDouble(2, maxPriceToSearch);
             preparedStatement.setString(3, "%" + makeToSearch + "%");
             preparedStatement.setString(4, "%" + modelToSearch + "%");
-            preparedStatement.setInt(5, minYear);
-            preparedStatement.setInt(6, maxYear);
+            preparedStatement.setInt(5, minYearToSearch);
+            preparedStatement.setInt(6, maxYearToSearch);
 
             preparedStatement.setString(7, "%" + colorToSearch + "%");
-            preparedStatement.setInt(8, minMiles);
-            preparedStatement.setInt(9, maxMiles);
+            preparedStatement.setInt(8, minMilesToSearch);
+            preparedStatement.setInt(9, maxMilesToSearch);
             preparedStatement.setString(10, "%" + typeToSearch + "%");
             preparedStatement.setBoolean(11, sold);
 
@@ -80,9 +80,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
     }
 
     @Override
-    public Vehicle getByVin(int vin)
-
-    {
+    public Vehicle getByVin(int vin) {
 
         Vehicle vehicle = null;
 
@@ -108,12 +106,14 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
         return vehicle;
     }
 
+    @Override
     public Vehicle create(Vehicle vehicle) {
 
-        String query = "INSERT INTO Vehicles(vin, year, make, model, vehicle_type, color, odometer, price, sold)" +
-                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Vehicles(vin, year, make, model, vehicle_type, color, odometer, price, sold) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = getConnection()) {
+
             PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1,vehicle.getVin());
@@ -146,9 +146,10 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
         return null;
     }
 
+    @Override
     public void updateVehicle(int vin, Vehicle vehicle) {
 
-        String query = "UPDATE vehicles SET year = ?, make = ?, model = ?, vehicle_type = ?," +
+        String query = "UPDATE vehicles SET year = ?, make = ?, model = ?, vehicle_type = ?, " +
                 "color = ?, odometer = ?, price = ?, sold = ? " +
                 "WHERE vin = ?";
 
@@ -175,6 +176,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
         }
     }
 
+    @Override
     public void deleteVehicle(int vin) {
 
         String query = "DELETE FROM Vehicles WHERE vin = ?";

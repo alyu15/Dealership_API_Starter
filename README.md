@@ -17,15 +17,45 @@ Moreover, they are able to register a new dealership, update an already existing
 ><details>
 ><summary> Dealership Filters </summary>
 >
-> IMAGE HERE
+>><details>
+>><summary> Filter By Name </summary>
+>>
+>> IMAGE HERE
+>></details>
 >
+>><details>
+>><summary> Filter By Phone Number </summary>
+>>
+>> IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By ID </summary>
+>>
+>>IMAGE HERE
+>></details>
 ></details>
 
 ><details>
 ><summary> Modifying a Dealership </summary>
 >
-> IMAGE HERE
+>><details>
+>><summary> Adding a Dealership </summary>
+>>
+>>IMAGE HERE
+>></details>
 >
+>><details>
+>><summary> Updating a Dealership </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Deleting a Dealership </summary>
+>>
+>>IMAGE HERE
+>></details>
 ></details>
 
 ## Vehicles Controller

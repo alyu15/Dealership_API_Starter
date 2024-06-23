@@ -37,7 +37,7 @@ public class VehiclesController {
     ) {
         try {
 
-            return vehiclesDao.search(minPrice, maxPrice, make, model, minYear, maxYear, color, minMiles, maxMiles, type, sold);
+            return vehiclesDao.search(minPrice, maxPrice, make, model, minYear, maxYear, color, minMiles, maxMiles, type);
 
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");

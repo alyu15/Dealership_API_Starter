@@ -22,7 +22,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
 
     @Override
     public List<Vehicle> search(double minPrice, double maxPrice, String make, String model, int minYear, int maxYear,
-                                String color, int minMiles, int maxMiles, String type, Boolean sold) {
+                                String color, int minMiles, int maxMiles, String type) {
 
         List<Vehicle> vehicles = new ArrayList<>();
 
@@ -33,8 +33,7 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
                 "AND (Year BETWEEN ? AND ?)" +
                 "AND (Color LIKE ?)" +
                 "AND (Odometer BETWEEN ? AND ?)" +
-                "AND (Vehicle_Type LIKE ?)" +
-                "AND (Sold = ?)";
+                "AND (Vehicle_Type LIKE ?)";
 
         double minPriceToSearch = minPrice == 0 ? -1 : minPrice;
         double maxPriceToSearch = maxPrice == 0 ? -1 : maxPrice;
@@ -62,7 +61,6 @@ public class MySqlVehiclesDao extends MySqlDaoBase implements VehiclesDao {
             preparedStatement.setInt(8, minMilesToSearch);
             preparedStatement.setInt(9, maxMilesToSearch);
             preparedStatement.setString(10, "%" + typeToSearch + "%");
-            preparedStatement.setBoolean(11, sold);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

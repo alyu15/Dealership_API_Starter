@@ -23,15 +23,15 @@ public class VehiclesController {
     }
 
     @GetMapping("")
-    public List<Vehicle> search(@RequestParam(name = "minPrice", required = false) double minPrice,
-                                @RequestParam(name = "maxPrice", required = false) double maxPrice,
+    public List<Vehicle> search(@RequestParam(name = "minPrice", required = false) Double minPrice,
+                                @RequestParam(name = "maxPrice", required = false) Double maxPrice,
                                 @RequestParam(name = "make", required = false) String make,
                                 @RequestParam(name = "model", required = false) String model,
-                                @RequestParam(name = "minYear", required = false) int minYear,
-                                @RequestParam(name = "maxYear", required = false) int maxYear,
+                                @RequestParam(name = "minYear", required = false) Integer minYear,
+                                @RequestParam(name = "maxYear", required = false) Integer maxYear,
                                 @RequestParam(name = "color", required = false) String color,
-                                @RequestParam(name = "minMiles", required = false) int minMiles,
-                                @RequestParam(name = "maxMiles", required = false) int maxMiles,
+                                @RequestParam(name = "minMiles", required = false) Integer minMiles,
+                                @RequestParam(name = "maxMiles", required = false) Integer maxMiles,
                                 @RequestParam(name = "type", required = false) String type,
                                 @RequestParam(name = "sold", required = false) Boolean sold
     ) {

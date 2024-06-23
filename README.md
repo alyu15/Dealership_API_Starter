@@ -76,15 +76,75 @@ database.
 ><details>
 ><summary> Vehicle Filters </summary>
 >
-> IMAGE HERE
+>><details>
+>><summary> Filter By ID </summary>
+>>
+>>IMAGE HERE
+>></details>
 >
+>><details>
+>><summary> Filter By Price </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By Make </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By Model </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By Year </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By Color </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By Mileage </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Filter By Type </summary>
+>>
+>>IMAGE HERE
+>></details>
 ></details>
 
 ><details>
 ><summary> Modifying a Vehicle </summary>
 >
-> IMAGE HERE
+>><details>
+>><summary> Adding a Vehicle </summary>
+>>
+>>IMAGE HERE
+>></details>
 >
+>><details>
+>><summary> Updating a Vehicle </summary>
+>>
+>>IMAGE HERE
+>></details>
+>
+>><details>
+>><summary> Deleting a Vehicle </summary>
+>>
+>>IMAGE HERE
+>></details>
 ></details>
 
 ## Sales Contracts Controller
@@ -128,7 +188,22 @@ Similar to the sales contracts, the user will be able to add to the database by 
 ## Interesting Piece of Code
 
 ```
+@PostMapping()
+    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+
+        try {
+
+            return vehiclesDao.create(vehicle);
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+        }
+    }
 ```
+I found this piece of code interesting because it contains such an important task of taking a whole entire vehicle
+and adding it to the database but it does it in only a couple of lines of code. I understand that the method only requires
+data entry from the user and calls the 'create' method from vehiclesDao but I found it very interesting how all these 
+separate things can be tied together and be utilized here.
 
 <br>
 <div align="center">

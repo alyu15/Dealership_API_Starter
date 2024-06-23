@@ -32,8 +32,7 @@ public class VehiclesController {
                                 @RequestParam(name = "color", required = false) String color,
                                 @RequestParam(name = "minMiles", required = false) Integer minMiles,
                                 @RequestParam(name = "maxMiles", required = false) Integer maxMiles,
-                                @RequestParam(name = "type", required = false) String type,
-                                @RequestParam(name = "sold", required = false) Boolean sold
+                                @RequestParam(name = "type", required = false) String type
     ) {
         try {
 

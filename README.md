@@ -20,19 +20,19 @@ Moreover, they are able to register a new dealership, update an already existing
 >><details>
 >><summary> Filter By Name </summary>
 >>
->> IMAGE HERE
+>> ![DealershipNameSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/DealershipByName.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Phone Number </summary>
 >>
->> IMAGE HERE
+>> ![DealershipPhoneSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/DealershipByPhoneNumber.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By ID </summary>
 >>
->>IMAGE HERE
+>> ![DealershipIdSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/DealershipById.JPG)
 >></details>
 ></details>
 
@@ -42,19 +42,19 @@ Moreover, they are able to register a new dealership, update an already existing
 >><details>
 >><summary> Adding a Dealership </summary>
 >>
->>IMAGE HERE
+>> ![AddDealership](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/AddDealership.JPG)
 >></details>
 >
 >><details>
 >><summary> Updating a Dealership </summary>
 >>
->>IMAGE HERE
+>> ![UpdateDealership](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/UpdateDealership.JPG)
 >></details>
 >
 >><details>
 >><summary> Deleting a Dealership </summary>
 >>
->>IMAGE HERE
+>> ![DeleteDealership](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/DeleteDealership.JPG)
 >></details>
 ></details>
 
@@ -79,49 +79,49 @@ database.
 >><details>
 >><summary> Filter By ID </summary>
 >>
->>IMAGE HERE
+>> ![VehicleIdSearch](
 >></details>
 >
 >><details>
 >><summary> Filter By Price </summary>
 >>
->>IMAGE HERE
+>> ![VehiclePriceSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehiclePriceSearch.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Make </summary>
 >>
->>IMAGE HERE
+>> ![VehicleMakeSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehicleMakeSearch.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Model </summary>
 >>
->>IMAGE HERE
+>> ![VehicleModelSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehicleModelSearch.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Year </summary>
 >>
->>IMAGE HERE
+>> ![VehicleYearSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehicleYearSearch.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Color </summary>
 >>
->>IMAGE HERE
+>> ![VehicleColorSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehicleColorSearch.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Mileage </summary>
 >>
->>IMAGE HERE
+>> ![VehicleMilesSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehicleMilesSearch.JPG)
 >></details>
 >
 >><details>
 >><summary> Filter By Type </summary>
 >>
->>IMAGE HERE
+>> ![VehicleTypeSearch](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/VehicleTypeSearch.JPG)
 >></details>
 ></details>
 
@@ -131,19 +131,19 @@ database.
 >><details>
 >><summary> Adding a Vehicle </summary>
 >>
->>IMAGE HERE
+>> ![AddVehicle](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/AddVehicle.JPG)
 >></details>
 >
 >><details>
 >><summary> Updating a Vehicle </summary>
 >>
->>IMAGE HERE
+>> ![UpdateVehicle](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/UpdateVehicle.JPG)
 >></details>
 >
 >><details>
 >><summary> Deleting a Vehicle </summary>
 >>
->>IMAGE HERE
+>> ![DeleteVehicle](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/DeleteVehicle.JPG)
 >></details>
 ></details>
 
@@ -154,14 +154,14 @@ as well as create a new sales contract to add to the database.
 ><details>
 ><summary> 'GET' a Sales Contract by Contract ID </summary>
 >
-> IMAGE HERE
+> ![SalesContractId](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/SalesContractsById.JPG)
 >
 ></details>
 
 ><details>
 ><summary> 'POST' a New Sales Contract </summary>
 >
-> IMAGE HERE
+> ![AddSalesContract](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/AddSalesContract.JPG)
 >
 ></details>
 
@@ -174,14 +174,14 @@ Similar to the sales contracts, the user will be able to add to the database by 
 ><details>
 ><summary> 'GET' a Lease Contract by Contract ID </summary>
 >
-> IMAGE HERE
+> ![LeaseContractId](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/LeaseContractById.JPG)
 >
 ></details>
 
 ><details>
-><summary> 'POST' a New Sales Contract </summary>
+><summary> 'POST' a New Lease Contract </summary>
 >
-> IMAGE HERE
+> ![AddLeaseContract](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/AddLeaseContract.JPG)
 >
 ></details>
 
@@ -209,5 +209,5 @@ separate things can be tied together and be utilized here.
 <div align="center">
 <b>Thank you for taking the time out to check out my application!</b>
 
-
+![Exit](https://github.com/alyu15/Dealership_API_Starter/blob/4c005434802bce186b08b9af5f9b89fa5b9ef967/Images/Exit.JPG)
 </div>
